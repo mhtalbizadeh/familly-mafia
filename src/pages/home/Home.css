@@ -1,24 +1,27 @@
-﻿.home {
+.home {
   min-height: 100svh;
-  width: min(100%, 450px);
-  margin: 0 auto;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
   direction: rtl;
   font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
-  background:
+  background-color: #0b0b0d;
+  background-image:
     linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.85)),
-    url("../../assets/background.png") center / cover no-repeat;
+    url("../../assets/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   color: #fff;
-  padding: 1.5rem 1.25rem;
   overflow: hidden;
 }
 
 .home__panel {
-  width: min(100%, 340px);
+  width: min(100%, 380px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,8 +47,10 @@
 }
 
 .home__button {
-  width: 100%;
-  padding: 0.95rem 1.4rem;
+  width: 90vw;
+  height: 10vh;
+  display: grid;
+  place-items: center;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   background: linear-gradient(
@@ -76,8 +81,8 @@
 }
 
 .home__button:active {
-  transform: scale(0.98);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+  /* transform: scale(0.98); */
+  /* box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4); */
 }
 
 @keyframes pulseGlow {
