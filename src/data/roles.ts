@@ -4,7 +4,7 @@ import detectiveImg from "../assets/heroImage/detective.png";
 import doctorImg from "../assets/heroImage/doctor.png";
 import doctorLectoImg from "../assets/heroImage/doctorLecto.png";
 import generalImg from "../assets/heroImage/general.png";
-import godFatherImg from "../assets/heroImage/godFather.png";
+import godfatherImg from "../assets/heroImage/godFather.png";
 import hardHealthImg from "../assets/heroImage/hardHealth.png";
 import jokerImg from "../assets/heroImage/joker.png";
 import mafiaImg from "../assets/heroImage/mafia.png";
@@ -191,7 +191,7 @@ export const roles: Role[] = [
       "سلاخی: هدف + حدس نقش؛ اگر حدس درست باشد هدف سلاخی می‌شود و قابل نجات/بازگشت نیست.",
       "طبق سناریو: بعد از شب معارفه، گادفادر همراه «مافیای ساده» برای هماهنگی بیدار می‌شود.",
     ].join("\n"),
-    image: godFatherImg,
+    image: godfatherImg,
     faction: "mafia",
     actions: ["shot", "alwaysNegative", "slaughter"],
   },
