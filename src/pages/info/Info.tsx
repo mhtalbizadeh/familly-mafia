@@ -1,9 +1,9 @@
 import type { CSSProperties, TouchEvent } from 'react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import type { Role, RoleFaction } from '../../data/roles'
-import rolesData from '../../data/roles'
+import  { roles, type Role } from '../../data/roles'
 import rotateIcon from '../../assets/rotateIcon.svg'
 import './Info.css'
+import type { RoleFaction } from '../../data/roleFaction'
 
 type Theme = { accent: string; deep: string; glow: string; dot: string }
 
@@ -14,7 +14,7 @@ const themes: Record<RoleFaction, Theme> = {
 }
 
 export default function Info() {
-  const slides = useMemo<Role[]>(() => rolesData, [])
+  const slides = useMemo<Role[]>(() => roles, [])
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const touchStart = useRef<number | null>(null)

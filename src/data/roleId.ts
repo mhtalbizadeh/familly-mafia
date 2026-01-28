@@ -1,0 +1,18 @@
+export type RoleId =
+  | "angel"
+  | "citizen"
+  | "detective"
+  | "doctor"
+  | "doctorLecto"
+  | "general"
+  | "godFather"
+  | "hardHealth"
+  | "joker"
+  | "mafia"
+  | "moreno"
+  | "negotiator"
+  | "priest"
+  | "silencer"
+  | "sniper"
+  | "terrorist"
+  | "wizard";
