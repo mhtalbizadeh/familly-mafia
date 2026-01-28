@@ -4,7 +4,7 @@ import detectiveImg from "../assets/heroImage/detective.png";
 import doctorImg from "../assets/heroImage/doctor.png";
 import doctorLectoImg from "../assets/heroImage/doctorLecto.png";
 import generalImg from "../assets/heroImage/general.png";
-import godFatherImg from "../assets/heroImage/godFather.png";
+import godFatherImg from "../assets/heroImage/angel.png";
 import hardHealthImg from "../assets/heroImage/hardHealth.png";
 import jokerImg from "../assets/heroImage/joker.png";
 import mafiaImg from "../assets/heroImage/mafia.png";
