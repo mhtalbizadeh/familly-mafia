@@ -1,0 +1,313 @@
+:global(:root) {
+  --bg: #060607;
+  --panel: rgba(12, 12, 14, 0.78);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --accent: #e0102f;
+  --accent-2: #1c1c23;
+  --text: #f5f5f7;
+  --muted: #b3b3c2;
+  --glass: rgba(255, 255, 255, 0.04);
+  --city: #1fa2ff;
+  --mafia: #f44336;
+  --independent: #c48cff;
+}
+
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(120vw 120vh at 20% 10%, rgba(224, 16, 47, 0.16), transparent 55%),
+    radial-gradient(110vw 110vh at 85% 25%, rgba(31, 162, 255, 0.12), transparent 55%),
+    radial-gradient(140vw 140vh at 50% 100%, rgba(196, 140, 255, 0.10), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding: 4vh 4vw;
+}
+
+.panel {
+  width: 100%;
+  max-width: 560px;
+  background: linear-gradient(180deg, rgba(12, 12, 14, 0.86), rgba(12, 12, 14, 0.68));
+  border: 1px solid var(--panel-border);
+  border-radius: 4.2vw;
+  padding: 3.2vh 4vw;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 2.2vh;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4vh;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3vw;
+}
+
+.title {
+  margin: 0;
+  font-size: 5.4vw;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 3.7vw;
+}
+
+.totalChip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2vw;
+  padding: 0.9vh 3.2vw;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--muted);
+  font-size: 3.2vw;
+}
+
+.totalChip strong {
+  color: var(--text);
+}
+
+.chipsRow {
+  display: flex;
+  gap: 2.2vw;
+  flex-wrap: wrap;
+}
+
+.chip {
+  flex: 1;
+  min-width: 26vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2vw;
+  padding: 1.1vh 3.2vw;
+  border-radius: 3.6vw;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--muted);
+  font-size: 3.3vw;
+}
+
+.chip strong {
+  color: var(--text);
+}
+
+.chipCity {
+  box-shadow: 0 0 0 1px rgba(31, 162, 255, 0.18) inset;
+}
+.chipMafia {
+  box-shadow: 0 0 0 1px rgba(244, 67, 54, 0.18) inset;
+}
+.chipIndependent {
+  box-shadow: 0 0 0 1px rgba(196, 140, 255, 0.18) inset;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 3.2vw;
+  line-height: 1.6;
+  padding: 1.1vh 3.2vw;
+  border-radius: 3.6vw;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6vh;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4.2vw;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(110% 90% at 10% 0%, rgba(255, 255, 255, 0.05), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  box-shadow:
+    0 14px 50px rgba(0, 0, 0, 0.50),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.cardGlow {
+  position: absolute;
+  inset: -12%;
+  filter: blur(18px);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.cardCity .cardGlow {
+  background: radial-gradient(60% 40% at 50% 35%, rgba(31, 162, 255, 0.16), transparent 70%);
+}
+.cardMafia .cardGlow {
+  background: radial-gradient(60% 40% at 50% 35%, rgba(244, 67, 54, 0.16), transparent 70%);
+}
+.cardIndependent .cardGlow {
+  background: radial-gradient(60% 40% at 50% 35%, rgba(196, 140, 255, 0.16), transparent 70%);
+}
+
+.cardInner {
+  position: relative;
+  z-index: 1;
+  padding: 2.2vh 4vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4vh;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3vw;
+}
+
+.playerBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 2.2vw;
+}
+
+.playerIndex {
+  font-size: 3.3vw;
+  color: var(--muted);
+  padding: 0.4vh 2.2vw;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.playerName {
+  font-size: 4.6vw;
+  letter-spacing: -0.02em;
+}
+
+.pill {
+  padding: 0.7vh 3.0vw;
+  border-radius: 999px;
+  font-size: 3.1vw;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pillCity {
+  color: var(--city);
+  box-shadow: 0 0 0 1px rgba(31, 162, 255, 0.18) inset;
+}
+.pillMafia {
+  color: var(--mafia);
+  box-shadow: 0 0 0 1px rgba(244, 67, 54, 0.18) inset;
+}
+.pillIndependent {
+  color: var(--independent);
+  box-shadow: 0 0 0 1px rgba(196, 140, 255, 0.18) inset;
+}
+
+.roleRow {
+  display: flex;
+  gap: 4vw;
+  align-items: flex-start;
+}
+
+.roleVisual {
+  width: 22vw;
+  max-width: 96px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 0.6vh 0;
+}
+
+.roleVisual img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.55));
+}
+
+.roleMeta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9vh;
+}
+
+.roleName {
+  font-size: 4.2vw;
+  margin: 0;
+}
+
+.roleDesc {
+  color: var(--muted);
+  font-size: 3.4vw;
+  line-height: 1.7;
+  white-space: pre-line;
+  max-height: 18vh;
+  overflow: auto;
+  padding-right: 1vw;
+}
+
+.roleDesc::-webkit-scrollbar {
+  width: 0.9vw;
+}
+.roleDesc::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vh;
+  padding-top: 0.6vh;
+}
+
+.btn {
+  width: 100%;
+  padding: 1.6vh 4vw;
+  border-radius: 3.6vw;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 4.0vw;
+  cursor: pointer;
+  transition: transform 150ms ease, opacity 150ms ease, border-color 150ms ease;
+}
+
+.btn:active {
+  transform: scale(0.99);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnPrimary {
+  background: linear-gradient(90deg, rgba(224, 16, 47, 0.95), rgba(224, 16, 47, 0.65));
+  border-color: rgba(224, 16, 47, 0.45);
+  box-shadow: 0 14px 30px rgba(224, 16, 47, 0.22);
+}
+
+.btnGhost {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.10);
+}

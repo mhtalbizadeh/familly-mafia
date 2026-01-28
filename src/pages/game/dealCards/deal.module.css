@@ -1,4 +1,4 @@
-:root {
+:global(:root) {
   --bg: #060607;
   --panel: rgba(12, 12, 14, 0.78);
   --panel-border: rgba(255, 255, 255, 0.08);
@@ -12,15 +12,24 @@
   --independent: #c48cff;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.deal-page {
+.page {
   min-height: 100vh;
-  background: radial-gradient(120vw 120vh at 20% 10%, rgba(224, 16, 47, 0.16), transparent 55%),
-    radial-gradient(110vw 110vh at 85% 25%, rgba(31, 162, 255, 0.12), transparent 55%),
-    radial-gradient(140vw 140vh at 50% 100%, rgba(196, 140, 255, 0.10), transparent 60%),
+  background:
+    radial-gradient(
+      120vw 120vh at 20% 10%,
+      rgba(224, 16, 47, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      110vw 110vh at 85% 25%,
+      rgba(31, 162, 255, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      140vw 140vh at 50% 100%,
+      rgba(196, 140, 255, 0.1),
+      transparent 60%
+    ),
     var(--bg);
   color: var(--text);
   display: flex;
@@ -29,41 +38,45 @@
   padding: 4vh 4vw;
 }
 
-.deal-panel {
+.panel {
   width: 100%;
   max-width: 520px;
-  background: linear-gradient(180deg, rgba(12, 12, 14, 0.86), rgba(12, 12, 14, 0.68));
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 14, 0.86),
+    rgba(12, 12, 14, 0.68)
+  );
   border: 1px solid var(--panel-border);
   border-radius: 4.2vw;
   padding: 3.2vh 4vw;
   backdrop-filter: blur(12px);
   box-shadow:
-    0 12px 40px rgba(0,0,0,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
   gap: 2.4vh;
 }
 
-.deal-title {
+.title {
   font-size: 5.3vw;
   margin: 0;
 }
 
-.deal-subtitle {
+.subtitle {
   margin: 0;
   color: var(--muted);
   line-height: 1.6;
   font-size: 3.6vw;
 }
 
-.deal-header {
+.header {
   display: flex;
   flex-direction: column;
   gap: 1.2vh;
 }
 
-.deal-header-top {
+.headerTop {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -71,25 +84,28 @@
   font-size: 3.8vw;
 }
 
-.deal-player strong,
-.deal-remaining strong {
+.playerLine strong {
   color: var(--text);
 }
 
-.deal-remaining {
+.remainingLine {
   color: var(--muted);
 }
 
-.deal-progress {
-  width: 100%;
-  height: 1.2vh;
-  background: rgba(255,255,255,0.06);
-  border-radius: 999px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.06);
+.remainingLine strong {
+  color: var(--text);
 }
 
-.deal-progress-bar {
+.progress {
+  width: 100%;
+  height: 1.2vh;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.progressBar {
   height: 100%;
   background: linear-gradient(90deg, var(--accent), rgba(31, 162, 255, 0.9));
   border-radius: 999px;
@@ -97,111 +113,133 @@
   transition: width 240ms ease;
 }
 
-.deal-progress-meta {
+.progressMeta {
   display: flex;
   justify-content: space-between;
   color: var(--muted);
   font-size: 3.2vw;
 }
 
-.deal-card {
+.card {
   position: relative;
   width: 100%;
   min-height: 54vh;
   border-radius: 4.2vw;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    radial-gradient(110% 90% at 10% 0%, rgba(224, 16, 47, 0.16), transparent 55%),
-    radial-gradient(100% 80% at 90% 10%, rgba(31, 162, 255, 0.12), transparent 55%),
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    radial-gradient(
+      110% 90% at 10% 0%,
+      rgba(224, 16, 47, 0.16),
+      transparent 55%
+    ),
+    radial-gradient(
+      100% 80% at 90% 10%,
+      rgba(31, 162, 255, 0.12),
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.02)
+    );
   box-shadow:
-    0 18px 60px rgba(0,0,0,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.08);
+    0 18px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.deal-card-glow {
+.cardGlow {
   position: absolute;
   inset: -10%;
-  background: radial-gradient(60% 40% at 50% 40%, rgba(224, 16, 47, 0.12), transparent 70%);
+  background: radial-gradient(
+    60% 40% at 50% 40%,
+    rgba(224, 16, 47, 0.12),
+    transparent 70%
+  );
   filter: blur(18px);
   opacity: 0.9;
   pointer-events: none;
 }
 
-.deal-card-inner {
+.cardInner {
   position: relative;
   z-index: 1;
-  padding: 2.6vh 4vw;
+  padding: 5vw;
   display: flex;
   flex-direction: column;
+
   gap: 1.8vh;
   height: 100%;
 }
 
-.deal-role-top {
+.roleTop {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2vw;
 }
 
-.deal-pill {
+.pill {
   padding: 0.8vh 3.2vw;
   border-radius: 999px;
   font-size: 3.1vw;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-.deal-pill--city {
-  box-shadow: 0 0 0 1px rgba(31,162,255,0.2) inset;
+.pillCity {
+  box-shadow: 0 0 0 1px rgba(31, 162, 255, 0.2) inset;
   color: var(--city);
 }
-.deal-pill--mafia {
-  box-shadow: 0 0 0 1px rgba(244,67,54,0.22) inset;
+
+.pillMafia {
+  box-shadow: 0 0 0 1px rgba(244, 67, 54, 0.22) inset;
   color: var(--mafia);
 }
-.deal-pill--independent {
-  box-shadow: 0 0 0 1px rgba(196,140,255,0.22) inset;
+
+.pillIndependent {
+  box-shadow: 0 0 0 1px rgba(196, 140, 255, 0.22) inset;
   color: var(--independent);
 }
 
-.deal-role-hint {
+.roleHint {
   color: var(--muted);
-  font-size: 3.0vw;
+  font-size: 3vw;
   text-align: right;
 }
 
-.deal-role-visual {
+.visual {
   width: 100%;
   display: grid;
   place-items: center;
   margin-top: 0.6vh;
 }
 
-.deal-role-visual img {
-  width: 48vw;
+.visual img {
+  width: 25vw;
   max-width: 220px;
   height: auto;
-  filter: drop-shadow(0 16px 28px rgba(0,0,0,0.55));
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.55));
   transform: translateZ(0);
 }
 
-.deal-role-content {
+.content {
+  width: 90vw;
+  direction: rtl;
   display: flex;
   flex-direction: column;
   gap: 1.2vh;
+  padding-right: 2vw !important;
 }
 
-.deal-role-name {
-  margin: 0;
+.roleName {
+  margin-right: 4vw !important;
   font-size: 5.2vw;
   letter-spacing: -0.02em;
 }
 
-.deal-role-desc {
-  margin: 0;
+.roleDesc {
+  margin-right: 4vw !important;
   color: var(--muted);
   font-size: 3.5vw;
   line-height: 1.7;
@@ -211,79 +249,86 @@
   padding-right: 1vw;
 }
 
-.deal-role-desc::-webkit-scrollbar {
+.roleDesc::-webkit-scrollbar {
   width: 0.8vw;
 }
-.deal-role-desc::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.10);
+
+.roleDesc::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 999px;
 }
 
-.deal-input {
+.inputWrap {
+  margin-right: 4vw;
   display: flex;
   flex-direction: column;
   gap: 0.8vh;
   margin-top: 0.8vh;
 }
 
-.deal-input span {
+.inputWrap span {
   font-size: 3.2vw;
   color: var(--muted);
 }
 
-.deal-input input {
-  width: 100%;
+.inputWrap input {
   padding: 1.35vh 4vw;
   border-radius: 3.4vw;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--text);
   outline: none;
   font-size: 3.8vw;
-  transition: border-color 160ms ease, transform 160ms ease;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
 }
 
-.deal-input input:focus {
+.inputWrap input:focus {
   border-color: rgba(224, 16, 47, 0.55);
   transform: translateY(-0.2vh);
 }
 
-.deal-mask {
+.mask {
   position: absolute;
   inset: 0;
   z-index: 3;
   display: grid;
   place-items: center;
   padding: 3vh 4vw;
-  background: rgba(0,0,0,0.58);
-  backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(20px);
 }
 
-.deal-mask-box {
-  width: 100%;
+.maskBox {
+  margin-top: 20vh;
   border-radius: 4vw;
   padding: 3vh 4vw;
-  border: 1px solid rgba(255,255,255,0.10);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    radial-gradient(110% 90% at 50% 0%, rgba(255,255,255,0.06), transparent 60%),
-    rgba(12,12,14,0.65);
-  box-shadow: 0 18px 60px rgba(0,0,0,0.55);
+    radial-gradient(
+      110% 90% at 50% 0%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    rgba(12, 12, 14, 0.65);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
   text-align: center;
 }
 
-.deal-mask-title {
-  font-size: 5.0vw;
+.maskTitle {
+  font-size: 5vw;
   margin-bottom: 1.2vh;
 }
 
-.deal-mask-text {
+.maskText {
   color: var(--muted);
   font-size: 3.6vw;
   line-height: 1.7;
   margin-bottom: 2.2vh;
 }
 
-.deal-footer {
+.footer {
   display: flex;
   flex-direction: column;
   gap: 1.2vh;
@@ -291,39 +336,46 @@
   padding-bottom: 0.6vh;
 }
 
-.deal-footer-note {
+.footerNote {
   color: var(--muted);
   font-size: 3.4vw;
   text-align: center;
 }
 
-.deal-btn {
+.btn {
   width: 100%;
   padding: 1.6vh 4vw;
   border-radius: 3.6vw;
-  border: 1px solid rgba(255,255,255,0.10);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text);
-  font-size: 4.0vw;
+  font-size: 4vw;
   cursor: pointer;
-  transition: transform 150ms ease, opacity 150ms ease, border-color 150ms ease;
+  transition:
+    transform 150ms ease,
+    opacity 150ms ease,
+    border-color 150ms ease;
 }
 
-.deal-btn:active {
+.btn:active {
   transform: scale(0.99);
 }
 
-.deal-btn:disabled {
+.btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.deal-btn--primary {
-  background: linear-gradient(90deg, rgba(224, 16, 47, 0.95), rgba(224, 16, 47, 0.65));
+.btnPrimary {
+  background: linear-gradient(
+    90deg,
+    rgba(224, 16, 47, 0.95),
+    rgba(224, 16, 47, 0.65)
+  );
   border-color: rgba(224, 16, 47, 0.45);
   box-shadow: 0 14px 30px rgba(224, 16, 47, 0.22);
 }
 
-.deal-card.is-revealed .deal-card-glow {
+.revealed .cardGlow {
   opacity: 1;
 }

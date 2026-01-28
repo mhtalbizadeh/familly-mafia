@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./dealCards.css";
+import styles from "./deal.module.css";
 
 type RoleFaction = "city" | "mafia" | "independent";
 type ActionType = string;
@@ -12,7 +12,7 @@ type StoredRole = {
   image: string;
   faction: RoleFaction;
   actions: ActionType[];
-  player?: string; // فعلاً خالی، آخر ذخیره پر میشه
+  player?: string;
 };
 
 type StoredSetup = {
@@ -46,7 +46,6 @@ export default function Deal() {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // Load + shuffle once on mount
   useEffect(() => {
     const raw = sessionStorage.getItem(STORAGE_KEY);
     if (!raw) {
@@ -58,10 +57,9 @@ export default function Deal() {
     try {
       const parsed: StoredSetup = JSON.parse(raw);
 
-      // رندوم کردن ترتیب کارت‌ها (صرفاً برای نمایش)
       const shuffled = shuffle(parsed.roles).map((r) => ({
         ...r,
-        player: r.player ?? "", // اگه قبلاً چیزی بوده، نگه دار
+        player: r.player ?? "",
       }));
 
       setSetup(parsed);
@@ -89,19 +87,11 @@ export default function Deal() {
   }, [index, total]);
 
   useEffect(() => {
-    // هر بار که رفتیم بازیکن بعدی، کارت دوباره تار بشه
     setRevealed(false);
-
-    // فوکوس input بعد از reveal
-    if (revealed) {
-      requestAnimationFrame(() => inputRef.current?.focus());
-    }
   }, [index]);
 
   useEffect(() => {
-    if (revealed) {
-      requestAnimationFrame(() => inputRef.current?.focus());
-    }
+    if (revealed) requestAnimationFrame(() => inputRef.current?.focus());
   }, [revealed]);
 
   const canProceed = (names[index] ?? "").trim().length > 0;
@@ -120,41 +110,36 @@ export default function Deal() {
 
   function handleNext() {
     if (!canProceed) return;
-
-    if (index < total - 1) {
-      setIndex((i) => i + 1);
-      return;
-    }
+    if (index < total - 1) setIndex((i) => i + 1);
   }
 
   function handleSave() {
     if (!setup) return;
-    // اگر آخرین نفر هم اسم نذاشته، ذخیره نکن
     if (!canProceed) return;
 
     const updatedDeck = deck.map((r, i) => ({
       ...r,
-      player: (names[i] ?? "").trim(), // player پر میشه
+      player: (names[i] ?? "").trim(),
     }));
 
-    const updated: StoredSetup = {
-      ...setup,
-      roles: updatedDeck,
-    };
+    const updated: StoredSetup = { ...setup, roles: updatedDeck };
 
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    navigate("/test");
+    navigate("/list");
   }
 
   if (!setup || !deck.length) {
     return (
-      <main className="deal-page">
-        <section className="deal-panel">
-          <h1 className="deal-title">اطلاعاتی پیدا نشد</h1>
-          <p className="deal-subtitle">
+      <main className={styles.page}>
+        <section className={styles.panel}>
+          <h1 className={styles.title}>اطلاعاتی پیدا نشد</h1>
+          <p className={styles.subtitle}>
             اول از صفحه قبل تنظیمات بازی رو انجام بده و تایید کن.
           </p>
-          <button className="deal-btn deal-btn--primary" onClick={() => navigate("/")}>
+          <button
+            className={`${styles.btn} ${styles.btnPrimary}`}
+            onClick={() => navigate("/")}
+          >
             برگشت
           </button>
         </section>
@@ -165,23 +150,26 @@ export default function Deal() {
   const isLast = index === total - 1;
 
   return (
-    <main className="deal-page">
-      <section className="deal-panel">
-        <header className="deal-header">
-          <div className="deal-header-top">
-            <div className="deal-player">
+    <main className={styles.page}>
+      <section className={styles.panel}>
+        <header className={styles.header}>
+          <div className={styles.headerTop}>
+            <div className={styles.playerLine}>
               بازیکن شماره <strong>{index + 1}</strong>
             </div>
-            <div className="deal-remaining">
+            <div className={styles.remainingLine}>
               باقی‌مانده: <strong>{remaining}</strong>
             </div>
           </div>
 
-          <div className="deal-progress">
-            <div className="deal-progress-bar" style={{ width: `${progressValue}%` }} />
+          <div className={styles.progress}>
+            <div
+              className={styles.progressBar}
+              style={{ width: `${progressValue}%` }}
+            />
           </div>
 
-          <div className="deal-progress-meta">
+          <div className={styles.progressMeta}>
             <span>{progressValue}%</span>
             <span>
               {index + 1}/{total}
@@ -189,32 +177,40 @@ export default function Deal() {
           </div>
         </header>
 
-        <section className={`deal-card ${revealed ? "is-revealed" : ""}`}>
-          <div className="deal-card-glow" aria-hidden="true" />
+        <section className={`${styles.card} ${revealed ? styles.revealed : ""}`}>
+          <div className={styles.cardGlow} aria-hidden="true" />
 
-          <div className="deal-card-inner">
-            <div className="deal-role-top">
-              <span className={`deal-pill deal-pill--${current.faction}`}>
+          <div className={styles.cardInner}>
+            <div className={styles.roleTop}>
+              <span
+                className={`${styles.pill} ${
+                  current.faction === "city"
+                    ? styles.pillCity
+                    : current.faction === "mafia"
+                    ? styles.pillMafia
+                    : styles.pillIndependent
+                }`}
+              >
                 {current.faction === "city"
                   ? "شهر"
                   : current.faction === "mafia"
                   ? "مافیا"
                   : "مستقل"}
               </span>
-              <span className="deal-role-hint">
+              <span className={styles.roleHint}>
                 لطفاً فقط خودِ بازیکن کارت رو ببینه 🙂
               </span>
             </div>
 
-            <div className="deal-role-visual">
+            <div className={styles.visual}>
               <img src={current.image} alt={current.name} />
             </div>
 
-            <div className="deal-role-content">
-              <h2 className="deal-role-name">{current.name}</h2>
-              <p className="deal-role-desc">{current.description}</p>
+            <div className={styles.content}>
+              <h2 className={styles.roleName}>{current.name}</h2>
+              <p className={styles.roleDesc}>{current.description}</p>
 
-              <label className="deal-input">
+              <label className={styles.inputWrap}>
                 <span>اسم بازیکن</span>
                 <input
                   ref={inputRef}
@@ -228,15 +224,17 @@ export default function Deal() {
           </div>
 
           {!revealed && (
-            <div className="deal-mask">
-              <div className="deal-mask-box">
-                <div className="deal-mask-title">کارت آماده‌ست 🎴</div>
-                <div className="deal-mask-text">
-                  وقتی مطمئن شدی فقط خودت داری نگاه می‌کنی،
-                  دکمه رو بزن.
+            <div className={styles.mask}>
+              <div className={styles.maskBox}>
+                <div className={styles.maskTitle}>کارت آماده‌ست 🎴</div>
+                <div className={styles.maskText}>
+                  وقتی مطمئن شدی فقط خودت داری نگاه می‌کنی، دکمه رو بزن.
                 </div>
 
-                <button className="deal-btn deal-btn--primary" onClick={handleReveal}>
+                <button
+                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  onClick={handleReveal}
+                >
                   مشاهده نقش
                 </button>
               </div>
@@ -244,17 +242,17 @@ export default function Deal() {
           )}
         </section>
 
-        <footer className="deal-footer">
+        <footer className={styles.footer}>
           {!isLast ? (
             <>
               <button
-                className="deal-btn deal-btn--primary"
+                className={`${styles.btn} ${styles.btnPrimary}`}
                 onClick={handleNext}
                 disabled={!revealed || !canProceed}
               >
                 بعدی
               </button>
-              <div className="deal-footer-note">
+              <div className={styles.footerNote}>
                 {(!revealed && "اول نقش رو ببین 👀") ||
                   (!canProceed && "اسم رو وارد کن ✍️") ||
                   "آماده‌ای بزن بعدی ✅"}
@@ -263,13 +261,13 @@ export default function Deal() {
           ) : (
             <>
               <button
-                className="deal-btn deal-btn--primary"
+                className={`${styles.btn} ${styles.btnPrimary}`}
                 onClick={handleSave}
                 disabled={!revealed || !canProceed}
               >
                 ذخیره
               </button>
-              <div className="deal-footer-note">
+              <div className={styles.footerNote}>
                 {(!revealed && "اول نقش رو ببین 👀") ||
                   (!canProceed && "اسم رو وارد کن ✍️") ||
                   "همه چی آماده‌ست، ذخیره کن ✅"}
