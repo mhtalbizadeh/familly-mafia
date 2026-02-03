@@ -1,1 +1,1 @@
-export type RoleFaction = "city" | "mafia" | "independent";
+export type RoleFaction = "city" | "mafia" | "independent"|"";
