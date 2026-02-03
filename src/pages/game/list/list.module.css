@@ -25,6 +25,22 @@
   padding: 4vh 4vw;
 }
 
+.page[data-phase="day"] {
+  background:
+    radial-gradient(120vw 120vh at 20% 10%, rgba(31, 162, 255, 0.18), transparent 55%),
+    radial-gradient(110vw 110vh at 85% 25%, rgba(224, 16, 47, 0.10), transparent 55%),
+    radial-gradient(140vw 140vh at 50% 100%, rgba(196, 140, 255, 0.08), transparent 60%),
+    var(--bg);
+}
+
+.page[data-phase="night"] {
+  background:
+    radial-gradient(120vw 120vh at 20% 10%, rgba(224, 16, 47, 0.20), transparent 55%),
+    radial-gradient(110vw 110vh at 85% 25%, rgba(31, 162, 255, 0.08), transparent 55%),
+    radial-gradient(140vw 140vh at 50% 100%, rgba(196, 140, 255, 0.12), transparent 60%),
+    var(--bg);
+}
+
 .panel {
   width: 100%;
   max-width: 560px;
@@ -81,6 +97,52 @@
 
 .totalChip strong {
   color: var(--text);
+}
+
+.phaseRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3vw;
+}
+
+.phaseLabel {
+  font-size: 3.3vw;
+  color: var(--muted);
+}
+
+.phaseToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6vw;
+  padding: 0.4vh 0.8vw;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.phaseBtn {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.9vh 3.2vw;
+  border-radius: 999px;
+  font-size: 3.2vw;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.phaseBtnActive {
+  color: var(--text);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+}
+
+.phaseBtnDay.phaseBtnActive {
+  background: rgba(31, 162, 255, 0.18);
+}
+
+.phaseBtnNight.phaseBtnActive {
+  background: rgba(224, 16, 47, 0.22);
 }
 
 .chipsRow {

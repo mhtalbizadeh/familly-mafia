@@ -15,4 +15,5 @@ export type RoleId =
   | "silencer"
   | "sniper"
   | "terrorist"
-  | "wizard";
+  | "wizard"
+  | "citizenKane";

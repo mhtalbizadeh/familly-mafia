@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./list.module.css";
+import nightAudio from "../../../assets/music/Night.mp3";
 
 type RoleFaction = "city" | "mafia" | "independent";
 type ActionType = string;
@@ -25,6 +26,9 @@ type StoredSetup = {
 };
 
 const STORAGE_KEY = "mafia:setup";
+const NIGHT_AUDIO_SRC = nightAudio;
+
+type Phase = "day" | "night";
 
 function factionLabel(f: RoleFaction) {
   if (f === "city") return "شهر";
@@ -35,6 +39,9 @@ function factionLabel(f: RoleFaction) {
 export default function List() {
   const navigate = useNavigate();
   const [data, setData] = useState<StoredSetup | null>(null);
+  const [phase, setPhase] = useState<Phase>("day");
+  const nightAudioRef = useRef<HTMLAudioElement | null>(null);
+  const hasNightAudio = NIGHT_AUDIO_SRC.trim().length > 0;
 
   useEffect(() => {
     const raw = sessionStorage.getItem(STORAGE_KEY);
@@ -66,6 +73,22 @@ export default function List() {
     return { city, mafia, independent };
   }, [roles]);
 
+  useEffect(() => {
+    if (!hasNightAudio) return;
+    const audio = nightAudioRef.current;
+    if (!audio) return;
+    if (phase === "night") {
+      audio.loop = true;
+      const playPromise = audio.play();
+      if (playPromise) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, [phase, hasNightAudio]);
+
   if (!data || !roles.length) {
     return (
       <main className={styles.page}>
@@ -87,7 +110,10 @@ export default function List() {
   }
 
   return (
-    <main className={styles.page}>
+    <main className={styles.page} data-phase={phase}>
+      {hasNightAudio && (
+        <audio ref={nightAudioRef} src={NIGHT_AUDIO_SRC} preload="auto" />
+      )}
       <section className={styles.panel}>
         <header className={styles.header}>
           <div className={styles.headerTop}>
@@ -95,6 +121,28 @@ export default function List() {
             <div className={styles.totalChip}>
               <span>کل</span>
               <strong>{roles.length}</strong>
+            </div>
+          </div>
+
+          <div className={styles.phaseRow}>
+            <span className={styles.phaseLabel}>حالت بازی</span>
+            <div className={styles.phaseToggle} role="group" aria-label="انتخاب حالت روز یا شب">
+              <button
+                type="button"
+                className={`${styles.phaseBtn} ${styles.phaseBtnDay} ${phase === "day" ? styles.phaseBtnActive : ""}`}
+                onClick={() => setPhase("day")}
+                aria-pressed={phase === "day"}
+              >
+                روز
+              </button>
+              <button
+                type="button"
+                className={`${styles.phaseBtn} ${styles.phaseBtnNight} ${phase === "night" ? styles.phaseBtnActive : ""}`}
+                onClick={() => setPhase("night")}
+                aria-pressed={phase === "night"}
+              >
+                شب
+              </button>
             </div>
           </div>
 
